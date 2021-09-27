@@ -6,7 +6,7 @@
 1. [x] Config project with dependencies 
     - SASS
     - Material Icons
-2. [ ] Create base structure 
+2. [x] Create base structure 
 3. [ ] Produce visual components 
 4. [ ] Decide if should I use TDD or NOT
 5. [ ] Implement basic code logic in components
