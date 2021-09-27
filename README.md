@@ -3,7 +3,9 @@
 ### Plan document for Vehiculum Challenger 
 
 0. [x] Init project
-1. [ ] Config project with dependencies
+1. [x] Config project with dependencies 
+    - SASS
+    - Material Icons
 2. [ ] Create base structure 
 3. [ ] Produce visual components 
 4. [ ] Decide if should I use TDD or NOT
