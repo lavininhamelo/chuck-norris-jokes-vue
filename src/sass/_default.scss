@@ -1,0 +1,36 @@
+html,
+body,
+#app {
+  min-height: 100vh;
+  text-align: left;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-default;
+}
+
+#app {
+  background-color: #efeeed;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  vertical-align: top;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+input {
+  background: transparent;
+  border: 0px;
+  outline: none;
+}
