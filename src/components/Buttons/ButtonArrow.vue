@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ButtonBase from "./Base/ButtonBase.vue";
+import ButtonBase from "../Base/BaseButton.vue";
 export default {
   components: { ButtonBase },
   props: {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ButtonArrow from "../ButtonArrow.vue";
+import ButtonArrow from "../Buttons/ButtonArrow.vue";
 export default {
   components: { ButtonArrow },
 };
