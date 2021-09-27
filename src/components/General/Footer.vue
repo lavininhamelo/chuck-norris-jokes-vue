@@ -2,12 +2,18 @@
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__title">Got jokes? Get paid for submitting!</div>
+      <div class="footer__button">
+        <button-arrow :padding="false" outline> Submit joke </button-arrow>
+      </div>
     </div>
   </footer>
 </template>
 
 <script>
-export default {};
+import ButtonArrow from "../ButtonArrow.vue";
+export default {
+  components: { ButtonArrow },
+};
 </script>
 
 <style lang="scss" scoped>
