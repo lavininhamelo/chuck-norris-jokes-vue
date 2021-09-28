@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   // vue.config.js
-  publicPath: "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/vehiculum-de/" : "/",
   chainWebpack(config) {
     config.entry("app").clear().add("./src/main.js").end();
     config.resolve.alias.set("@", path.join(__dirname, "./src"));
@@ -11,7 +11,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         sassOptions: {
-          includePaths: [path.resolve(__dirname, "src")],
+          includePaths: ["/Users/ninah/Projects/TESTE/vue-vehiculum-de/src"],
           indentedSyntax: false,
         },
         prependData: '@import "@/sass/main.scss";',
