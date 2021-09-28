@@ -1,6 +1,7 @@
 const state = {
   jokes: [],
   jokesByCategory: [],
+  loading: true,
 };
 
 const mutations = {
@@ -10,6 +11,9 @@ const mutations = {
   SET_JOKES_BY_CATEGORY(state, value) {
     state.jokesByCategory = value;
   },
+  SET_LOADING(state, value) {
+    state.loading = value;
+  },
   CHANGE_JOKE_BY_INDEX(state, { index, joke }) {
     state.jokes[index] = joke;
   },
@@ -18,6 +22,7 @@ const mutations = {
 const getters = {
   getJokesList: (state) => state.jokes,
   getJokesByCategory: (state) => state.jokesByCategory,
+  loading: (state) => state.loading,
 };
 
 const actions = {
@@ -78,8 +83,6 @@ const actions = {
   },
 
   async mapJokesToCategory({ commit, getters, dispatch }) {
-    console.log(2);
-
     let jokes = getters.getJokesList;
     let categories = await dispatch("Category/getCategories", null, {
       root: true,
@@ -117,6 +120,7 @@ const actions = {
 
     commit("UPDATE_JOKES_LIST", jokes);
     commit("SET_JOKES_BY_CATEGORY", categories);
+    commit("SET_LOADING", false);
   },
 };
 

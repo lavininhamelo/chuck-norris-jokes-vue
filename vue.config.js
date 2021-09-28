@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   // vue.config.js
-  publicPath: process.env.NODE_ENV === "production" ? "/vehiculum-de/" : "/",
+  publicPath: "/vue-vehiculum-de/",
   chainWebpack(config) {
     config.entry("app").clear().add("./src/main.js").end();
     config.resolve.alias.set("@", path.join(__dirname, "./src"));
