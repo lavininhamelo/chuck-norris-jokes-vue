@@ -26,9 +26,6 @@ export default {
   created() {
     this.loadData();
   },
-  mounted() {
-    console.log(this.loading);
-  },
 };
 </script>
 
