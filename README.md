@@ -15,7 +15,7 @@
 5. [x] Implement basic code logic in components
 6. [x] Prepare services to call API
 7. [x] Construct State Management with Vuex
-8. [ ] Make adjustments
+8. [x] Make adjustments
 9. [ ] End the Project
 
 ### Implementations details and decisions
