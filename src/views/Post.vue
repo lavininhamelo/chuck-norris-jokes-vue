@@ -32,7 +32,7 @@
         </footer>
       </article>
       <aside class="post__ranking">
-        <ranking-card />
+        <ranking-card @showJoke="goToJoke($event)" />
       </aside>
     </main>
   </section>
