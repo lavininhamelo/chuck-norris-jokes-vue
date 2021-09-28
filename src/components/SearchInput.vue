@@ -6,11 +6,19 @@
       icon="search"
       placeholder="How can we make you laugh today?"
     />
-    <div class="search-dropbox">
+    <div
+      v-if="results.length > 0 && value && value.length >= 3"
+      class="search-dropbox"
+    >
       <ul class="search-dropbox__list">
-        <li v-for="n in 4" :key="n" class="search-dropbox__item">
+        <li
+          v-for="result in results.slice(0, 6)"
+          :key="result.id"
+          class="search-dropbox__item"
+          @click="goToJoke(result)"
+        >
           <span class="search-dropbox__icon material-icons">bolt</span>
-          <p class="search-dropbox__text">I'm a search item {{ n }}</p>
+          <p class="search-dropbox__text">{{ result.value | limit }}</p>
         </li>
       </ul>
     </div>
@@ -18,12 +26,36 @@
 </template>
 
 <script>
-import BaseInput from "@/components/Base/BaseInput";
+import BaseInput from "@/components/Base/BaseInput.vue";
 export default {
   components: { BaseInput },
   props: {
     value: {
       required: true,
+    },
+    results: {
+      required: false,
+      default: () => {
+        return [];
+      },
+    },
+  },
+
+  methods: {
+    goToJoke(joke) {
+      this.$emit("input");
+      this.$router.push({
+        name: "post",
+        params: {
+          id: joke.id,
+          joke,
+        },
+      });
+    },
+  },
+  filters: {
+    limit: function (value) {
+      return value.substring(0, 30) + "...";
     },
   },
 };

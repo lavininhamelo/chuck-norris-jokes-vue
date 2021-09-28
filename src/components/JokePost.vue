@@ -2,26 +2,44 @@
   <div class="card">
     <div class="card__header">
       <div class="ticket">
-        <ticket color="#fea934"> Adult</ticket>
+        <ticket color="#fea934"> {{ category }}</ticket>
       </div>
       <div class="status">
-        <popularity-label :likes="23" :unlikes="12">Label</popularity-label>
+        <popularity-label :likes="joke.likes" :unlikes="joke.unlikes"
+          >Label</popularity-label
+        >
       </div>
     </div>
     <div class="card__content">
-      <div class="card__title">Joke</div>
-      <p class="card__text">Joke Value Te Value Card Text Value Card Text</p>
+      <div class="card__title">{{ category }} Joke</div>
+      <p class="card__text">
+        {{ joke.value }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import PopularityLabel from "./PopularityLabel.vue";
-import Ticket from "./Ticket.vue";
+import PopularityLabel from "@/components/PopularityLabel.vue";
+import Ticket from "@/components/Ticket.vue";
 export default {
   components: {
     Ticket,
     PopularityLabel,
+  },
+  props: {
+    joke: {
+      required: true,
+    },
+  },
+  computed: {
+    category() {
+      return this.joke &&
+        this.joke.categories &&
+        this.joke.categories.length > 0
+        ? this.joke.categories[0]
+        : "Uncategorized";
+    },
   },
 };
 </script>

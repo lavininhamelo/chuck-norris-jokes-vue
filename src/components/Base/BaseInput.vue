@@ -14,7 +14,6 @@
       @focus="focus = true"
       @blur="focus = false"
     />
-
     <span v-if="icon" class="material-icons">{{ icon }}</span>
   </div>
 </template>

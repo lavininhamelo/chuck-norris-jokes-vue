@@ -2,10 +2,22 @@
   <div class="card">
     <div class="card__title">THE TOP 10 JOKES THIS WEEK</div>
     <div class="card__body">
-      <a v-for="n in 10" :key="n" class="card__link">Top Item N{{ n }}</a>
+      <a v-for="joke in jokes.slice(0, 9)" :key="joke.id" class="card__link">{{
+        `${joke.categories[0] || "Uncategorized"} Joke ${joke.index}`
+      }}</a>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    jokes() {
+      return this.$store.getters["Joke/getJokesList"];
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .card {

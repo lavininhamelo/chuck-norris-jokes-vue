@@ -16,6 +16,25 @@ export default {
       results: [],
     };
   },
+  watch: {
+    search(value) {
+      if (value && value.length >= 3) {
+        this.searchJoke(value);
+      }
+    },
+  },
+  methods: {
+    async searchJoke(value) {
+      try {
+        let response = await this.$jokeService.searchJokeByTerm(value);
+        if (response.status === 200) {
+          this.results = response.data.result;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
 

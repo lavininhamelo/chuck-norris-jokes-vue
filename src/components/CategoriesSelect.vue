@@ -1,6 +1,12 @@
 <template>
   <select placeholder="Select a category" v-model="selected" class="select">
-    <option v-for="n in 10" :key="n" :value="n">JOKES</option>
+    <option
+      v-for="(category, index) in categories.slice(0, categories.length - 2)"
+      :key="index"
+      :value="index"
+    >
+      {{ category.name.toUpperCase() }} JOKES
+    </option>
   </select>
 </template>
 

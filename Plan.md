@@ -8,9 +8,9 @@
 3. [x] Produce visual components
 4. [x] Decide if should I use TDD or NOT
        For know, because its a test, its better to focus in the final project, and maybe make some tests before that.
-5. [ ] Implement basic code logic in components
-6. [ ] Prepare services to call API
-7. [ ] Construct State Management with Vuex
+5. [x ] Implement basic code logic in components
+6. [x] Prepare services to call API
+7. [x] Construct State Management with Vuex
 8. [ ] Make adjustments
 9. [ ] End the Project
 

@@ -67,21 +67,21 @@ export default {
   border-style: solid;
   border-color: transparent;
   position: relative;
+}
 
-  &__:hover {
-    filter: brightness(0.9);
-  }
+.button:hover {
+  filter: brightness(0.9);
+}
 
-  &__:active {
-    filter: brightness(0.85);
-  }
+.button:active {
+  filter: brightness(0.85);
+}
 
-  &____icon {
-    margin-left: 4px;
-  }
+.button__icon {
+  margin-left: 4px;
+}
 
-  &____icon-left {
-    margin-right: 4px;
-  }
+.button__icon-left {
+  margin-right: 4px;
 }
 </style>

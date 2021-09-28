@@ -1,19 +1,33 @@
 <template>
-  <section class="post">
-    <header class="post__header">
+  <section v-if="joke" class="post">
+    <header @click="goToStart()" class="post__header">
       <span class="post__back-button material-icons"> arrow_back_ios </span>
     </header>
     <main class="post__body">
       <article class="post__card">
-        <joke-post />
+        <joke-post v-if="joke" :joke="joke" />
         <footer class="post__footer">
           <div class="post__footer__buttons">
-            <button-rate>{{ 12 }}</button-rate>
-            <button-rate type="unlike">{{ 3 }}</button-rate>
+            <button-rate @click.native="likeJoke()">{{
+              joke.likes
+            }}</button-rate>
+            <button-rate @click.native="unlikeJoke()" type="unlike">{{
+              joke.unlikes
+            }}</button-rate>
           </div>
           <div class="post__footer__actions">
-            <arrow-buttons :type="'left'">prev joke</arrow-buttons>
-            <arrow-buttons class="ml-4">next joke</arrow-buttons>
+            <arrow-buttons
+              v-if="joke.index != 0"
+              @click.native="goToPrevious()"
+              :type="'left'"
+              >prev joke</arrow-buttons
+            >
+            <arrow-buttons
+              v-if="joke.index != jokes.length - 1"
+              class="ml-4"
+              @click.native="goToNext()"
+              >next joke</arrow-buttons
+            >
           </div>
         </footer>
       </article>
@@ -31,6 +45,75 @@ import JokePost from "@/components/JokePost.vue";
 import RankingCard from "@/components/RankingCard.vue";
 export default {
   components: { JokePost, RankingCard, ArrowButtons, ButtonRate },
+  props: {
+    id: {
+      required: true,
+    },
+    jokeData: {
+      required: false,
+    },
+  },
+  data() {
+    return {
+      joke: this.jokeData,
+    };
+  },
+  computed: {
+    jokes() {
+      return this.$store.getters["Joke/getJokesList"];
+    },
+  },
+  methods: {
+    async getRandomJoke() {
+      try {
+        let response = await this.$jokeService.getRandomJoke();
+        if (response.status === 200) {
+          this.goToJoke(response.data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    goToJoke(joke) {
+      this.$router.push({
+        name: "post",
+        params: {
+          id: joke.id,
+          jokeData: joke,
+        },
+      });
+    },
+    async goToNext() {
+      let joke = this.jokes[this.joke.index + 1];
+      this.joke = joke;
+
+      this.goToJoke(joke);
+    },
+    async goToPrevious() {
+      let joke = this.jokes[this.joke.index - 1];
+      this.joke = joke;
+      this.goToJoke(joke);
+    },
+    async likeJoke() {
+      this.joke = await this.$store.dispatch("Joke/likeJoke", this.joke);
+    },
+
+    async unlikeJoke() {
+      this.joke = await this.$store.dispatch("Joke/unlikeJoke", this.joke);
+    },
+    goToStart() {
+      this.$router.push("/");
+    },
+    async loadJoke() {
+      let joke = await this.$store.dispatch("Joke/getJokeById", this.id);
+      this.joke = joke;
+    },
+  },
+  created() {
+    if (!this.jokeData) {
+      this.loadJoke();
+    }
+  },
 };
 </script>
 

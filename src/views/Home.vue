@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
+  <div v-if="activeCategory" class="home">
     <div class="home__select">
-      <categories-select />
+      <categories-select :categories="categories" @select="setJokes($event)" />
     </div>
     <div class="home__buttons">
-      <template v-for="category in 6">
+      <template
+        v-for="(category, index) in categories.slice(0, categories.length - 2)"
+      >
         <base-button
+          v-if="category.jokes && category.jokes.length > 6"
           class="home__button"
-          bgColor="#ff9fe3"
+          :bgColor="category.color"
           :borderColor="activeCategory === category ? '#5e5e5e' : 'transparent'"
           :textColor="activeCategory === category ? '#5e5e5e' : '#fff'"
-          :key="category"
+          :key="category.key"
+          @click.native="setJokes(index)"
         >
-          {{ category }} Jokes
+          {{ category.name }} Jokes
         </base-button>
       </template>
 
@@ -22,6 +26,7 @@
         borderColor="#d1bb91"
         textColor="#d1bb91"
         icon="arrow_downward"
+        @click.native="setJokes(categories.length - 2)"
       >
         View all
       </base-button>
@@ -30,20 +35,27 @@
     <div class="home__separator" />
 
     <div class="home__ticket">
-      <ticket color="#FF99ff">Ticket</ticket>
+      <ticket :color="activeCategory.color">{{ activeCategory.name }}</ticket>
     </div>
 
     <div class="home__cards">
-      <joke-card :key="joke" v-for="joke in 6" />
+      <joke-card
+        v-for="joke in activeCategory.jokes.slice(0, 6 * this.page)"
+        :key="joke.id"
+        :joke="joke"
+        @click.native="goToJoke(joke)"
+      />
     </div>
 
     <div class="home__all">
       <base-button
+        v-if="hasJokes"
         class="home__button"
         bgColor="transparent"
         borderColor="#d1bb91"
         textColor="#d1bb91"
         icon="arrow_downward"
+        @click.native="page++"
       >
         View more
       </base-button>
@@ -64,6 +76,44 @@ export default {
     Ticket,
     JokeCard,
     CategoriesSelect,
+  },
+  data() {
+    return {
+      activeCategory: false,
+      page: 1,
+    };
+  },
+  watch: {
+    categories() {
+      this.setJokes(0);
+    },
+  },
+  methods: {
+    async setJokes(index) {
+      this.activeCategory = this.categories[index];
+      this.page = 1;
+    },
+    goToJoke(joke) {
+      this.$router.push({
+        name: "post",
+        params: {
+          id: joke.id,
+        },
+      });
+    },
+  },
+  computed: {
+    hasJokes() {
+      if (this.activeCategory.jokes.length <= this.page * 6) {
+        return false;
+      } else return true;
+    },
+    categories() {
+      return this.$store.getters[`Joke/getJokesByCategory`];
+    },
+  },
+  mounted() {
+    this.setJokes(0);
   },
 };
 </script>
@@ -109,10 +159,10 @@ export default {
   }
 
   &__select {
-    display: block;
+    display: flex;
     margin: 16px 16px;
 
-    @media (min-width: 768x) {
+    @media (min-width: 768px) {
       display: none;
     }
   }
