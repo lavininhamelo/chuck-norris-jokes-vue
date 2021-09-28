@@ -14,9 +14,9 @@
     >
       west
     </span>
-    <button-base :padding="false" textColor="#cfb995" bgColor="transparent">
+    <base-button :padding="false" textColor="#cfb995" bgColor="transparent">
       <slot> </slot>
-    </button-base>
+    </base-button>
     <span
       v-if="type === 'right'"
       :class="direction"
@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import ButtonBase from "../Base/BaseButton.vue";
+import BaseButton from "../Base/BaseButton.vue";
 export default {
-  components: { ButtonBase },
+  components: { BaseButton },
   props: {
     type: {
       type: String,
