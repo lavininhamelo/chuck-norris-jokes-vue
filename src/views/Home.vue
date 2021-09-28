@@ -3,6 +3,7 @@
     <div class="home__select">
       <categories-select :categories="categories" @select="setJokes($event)" />
     </div>
+
     <div class="home__buttons">
       <template
         v-for="(category, index) in categories.slice(0, categories.length - 2)"
@@ -19,7 +20,6 @@
           {{ category.name }} Jokes
         </base-button>
       </template>
-
       <base-button
         class="home__button"
         bgColor="transparent"
@@ -58,6 +58,17 @@
         @click.native="page++"
       >
         View more
+      </base-button>
+      <base-button
+        v-else
+        class="home__button"
+        bgColor="transparent"
+        borderColor="#d1bb91"
+        textColor="#d1bb91"
+        icon="arrow_upward"
+        @click.native="backToTop()"
+      >
+        Back to top!
       </base-button>
     </div>
   </div>
@@ -100,6 +111,9 @@ export default {
           id: joke.id,
         },
       });
+    },
+    backToTop() {
+      window.scrollTo(0, 0);
     },
   },
   computed: {
