@@ -50,35 +50,35 @@ export default {
   border: 1px solid $white-two;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   color: $greyish;
-}
 
-.input__element {
-  &::placeholder {
-    color: $greyish;
-    opacity: 1;
+  &__element {
+    &::placeholder {
+      color: $greyish;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: $greyish;
+    }
+
+    &::-ms-input-placeholder {
+      color: $greyish;
+    }
   }
 
-  &:-ms-input-placeholder {
-    color: $greyish;
-  }
-
-  &::-ms-input-placeholder {
-    color: $greyish;
-  }
-}
-
-.input--focus {
-  background: $white;
-  border: 1px solid #aaa;
-  color: $black;
-}
-
-.input__element {
-  flex: 1;
-  color: $white;
-
-  &:focus {
+  &--focus {
+    background: $white;
+    border: 1px solid #aaa;
     color: $black;
+  }
+
+  &__element {
+    flex: 1;
+    color: $white;
+
+    &:focus {
+      color: $black;
+    }
   }
 }
 </style>
