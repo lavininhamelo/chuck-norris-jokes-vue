@@ -63,6 +63,11 @@ export default {
       return this.$store.getters["Joke/getJokesList"];
     },
   },
+  watch: {
+    id() {
+      this.loadJoke();
+    },
+  },
   methods: {
     async getRandomJoke() {
       try {
