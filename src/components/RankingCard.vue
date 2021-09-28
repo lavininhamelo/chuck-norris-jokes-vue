@@ -2,9 +2,13 @@
   <div class="card">
     <div class="card__title">THE TOP 10 JOKES THIS WEEK</div>
     <div class="card__body">
-      <a v-for="joke in jokes.slice(0, 9)" :key="joke.id" class="card__link">{{
-        `${joke.categories[0] || "Uncategorized"} Joke ${joke.index}`
-      }}</a>
+      <a
+        v-for="joke in jokes.slice(0, 9)"
+        :key="joke.id"
+        @click="$emit('showJoke', joke)"
+        class="card__link"
+        >{{ `${joke.categories[0] || "Uncategorized"} Joke ${joke.index}` }}</a
+      >
     </div>
   </div>
 </template>
