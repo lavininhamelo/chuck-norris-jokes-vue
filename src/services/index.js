@@ -1,5 +1,5 @@
 import axios from "axios";
-import JokeService from "../services/JokeService";
+import JokeService from "@/services/JokeService";
 
 axios.defaults.baseURL = "https://api.chucknorris.io/";
 
