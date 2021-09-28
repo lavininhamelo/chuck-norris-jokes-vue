@@ -21,7 +21,7 @@ export default {
     label() {
       if (this.unlikes > this.likes) {
         return "Chestnut";
-      } else if (this.likes >= 51 && this.likes < 100) {
+      } else if (this.likes >= 51 && this.likes <= 100) {
         return "Trending";
       } else if (this.likes >= 101) {
         return "Hall of fame";
