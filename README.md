@@ -1,4 +1,9 @@
-# Challenge Plan
+# Project
+
+Small app to retrieve jokes about Chuck Norris, categorize and list.
+
+Developed with Vue.js and Vuex.
+
 
 ### Project setup
 
